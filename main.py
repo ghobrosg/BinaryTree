@@ -28,6 +28,31 @@ def to_binary_tree(items: list[int]):
     return inner()
 
 
+def preorder_traversal(lst: list) -> list[int]:
+    """
+    >>> preorder_traversal([1, None, 2, None, None, 3])
+    [1, 2, 3]
+    >>> preorder_traversal(["F", "B", "G", "A", "D", None, "I", None, None, "C", "E", None, None, "H", None])
+    ['F', 'B', 'A', 'D', 'C', 'E', 'G', 'I', 'H']
+    >>> preorder_traversal([10, 20, 30, 40, 60, 50, None])
+    [10, 20, 40, 60, 30, 50]
+    >>> preorder_traversal([40, 30, 50, 25, 35, 45, 60, 15, 28, None, None, None, None, 55, 70])
+    [40, 30, 25, 15, 28, 35, 50, 45, 60, 55, 70]
+    """
+    curr = to_binary_tree(lst)
+    output = []
+    stack = []
+
+    while curr or stack:
+        if curr:
+            output.append(curr.val)
+            stack.append(curr.right)
+            curr = curr.left
+        else:
+            curr = stack.pop()
+    return output
+
+
 def is_symmetric(lst: list) -> bool:
     """
     Given an array, convert it to a binary tree and check if the binary
